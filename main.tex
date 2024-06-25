@@ -1,0 +1,250 @@
+\documentclass[a4,10pt,comentarios]{aleph-notas}
+
+% -- Paquetes adicionales
+\usepackage{enumitem}
+\usepackage{aleph-comandos}
+\usepackage{mathrsfs}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{multicol}
+
+% -- Datos del libro
+\institucion{Proyecto Alephsub0}
+% \carrera{}
+\asignatura{Ecuaciones Diferenciales Ordinarias}
+\tema{Formulario: Transformada de Laplace}
+\autor{Andrés Merino}
+\fecha{Julio 2024}
+\fuente{montserrat}
+
+%% --> Logos de las guias
+\logouno[4.5cm]{Logos/LogoAlephsub0-02}
+\definecolor{colordef}{cmyk}{0.81,0.62,0.00,0.22}
+
+%% --> Comandos adicionales
+\newcommand{\lap}[2][s]{\displaystyle \mathscr{L} \left[#2\right](#1)}
+\newcommand{\lapi}[2][t]{\displaystyle \mathscr{L}^{-1} \left[#2\right](#1)}
+
+\newcommand{\Gam}[1]{\displaystyle\Gamma\left(#1\right)}
+\newcommand{\intd}[4]{\displaystyle\int^{#2}_{#1} #3\ d#4}
+
+\begin{document}
+
+\encabezado
+
+\section{Definiciones}
+
+\begin{center}
+    \begin{tabular}{ll}
+    \toprule
+        \textbf{Función} & \textbf{Definición} \\
+    \midrule
+        Transformada de Laplace & 
+            $\displaystyle \lap{f(t)} = \int_0^{+\infty} e^{-st} f(t) \, dt$.
+        \\[6mm]
+        Función Gamma & 
+            $\displaystyle \Gamma(x) = \int_0^{+\infty} e^{-t} t^{x-1} \, dt$. 
+        \\[6mm]
+        Función Beta & 
+            $\displaystyle \beta(x, y) = \int_0^{1} u^{x-1} (1-u)^{y-1} \, du$. 
+        \\[6mm]
+        Función de Heaviside & 
+            $\displaystyle u(t-a) = 
+            \begin{cases}
+            1 & \text{si } t > a, \\
+            0 & \text{si } t < a.
+            \end{cases}$ 
+        \\[6mm]
+        Convolución & 
+            $\displaystyle f(t) \ast g(t) = \int_0^{t} f(u) g(t-u) \, du$. 
+        \\[6mm]
+        Delta de Dirac$^*$& 
+            $\displaystyle \delta(t-a) = 
+            \begin{cases}
+            +\infty & \text{si } t = a, \\
+            0 & \text{si } t \ne a.
+            \end{cases}$ 
+        \\
+    \bottomrule
+    \end{tabular}
+
+\vspace{3mm}
+{\footnotesize $^*$ De manera formal, esta no es una función, y lo presentado sería solo la idea intuitiva.}
+\end{center}
+
+
+\section{Principales transformadas}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+    \toprule
+        \textbf{Función} & \textbf{Transformada de Laplace} \\
+         $f(t)$ & $\lap{f(t)}$ \\
+    \midrule
+        $1$
+        & $\displaystyle \frac{1}{s}, \quad s>0$.
+        \\[6mm]
+        $t$
+        & $\displaystyle \frac{1}{s^2}, \quad s>0$.
+        \\[6mm]
+        $t^n$ 
+        & $\displaystyle \frac{n!}{s^{n+1}}, \quad n \in \mathbb{N},\ s>0$. 
+        \\[6mm]
+        $t^\alpha$ 
+        & $\displaystyle \frac{\Gamma(\alpha+1)}{s^{\alpha+1}}, \quad \alpha>-1,\ s>0$. 
+        \\[6mm]
+        $e^{at}$ 
+        & $\displaystyle \frac{1}{s-a}, \quad s>a$. 
+        \\[6mm]
+        $\sin(at)$ 
+        & $\displaystyle \frac{a}{s^2+a^2}, \quad s>0$. 
+        \\[6mm]
+        $\cos(at)$ 
+        & $\displaystyle \frac{s}{s^2+a^2}, \quad s>0$. 
+        \\
+    \bottomrule
+\end{tabular}
+%
+\hspace{8mm}
+%
+\begin{tabular}{@{}ll@{}}
+    \toprule
+        \textbf{Función} & \textbf{Transformada de Laplace} \\
+         $f(t)$ & $\lap{f(t)}$ \\
+    \midrule
+        $\cosh(at)$ 
+        & $\displaystyle \frac{s}{s^2-a^2}, \quad s>|a|$. 
+        \\[6mm]
+        $\senh(at)$ 
+        & $\displaystyle \frac{a}{s^2-a^2}, \quad s>|a|$. 
+        \\[6mm]
+        $\delta(t-a)$ 
+        & $\displaystyle e^{-as}, \quad \text{para todo } s$. 
+        \\[6mm]
+        $u(t-a)$ 
+        & $\displaystyle \frac{e^{-as}}{s}, \quad s>0$.
+        \\[6mm]
+        $\displaystyle\frac{1}{a}\left(1-e^{-at}\right)$
+        & $\displaystyle \frac{1}{s(s+a)}, \quad s>0$.
+        \\[6mm]
+        $\displaystyle\frac{1}{b-a}\left(e^{-at}-e^{-bt}\right)$
+        & $\displaystyle \frac{1}{(s+a)(s+b)}, \quad s>0$.
+        \\[6mm]
+        $\displaystyle\frac{1}{b-a}\left(be^{-bt}-ae^{-at}\right)$
+        & $\displaystyle \frac{s}{(s+a)(s+b)}, \quad s>0$.
+        \\
+    \bottomrule
+\end{tabular}
+\end{center}
+
+\section{Propiedades de la Transformada de Laplace}
+\begin{itemize}[leftmargin=*]
+\item {Linealidad:} 
+    \begin{align*}
+       &\lap{af(t)+bg(t)}=a\lap{f(t)}+b\lap{g(t)},\\[3mm]
+       &\lapi{a\varphi(s)+b\psi(s)}=a\lapi{\varphi(s)}+b\lapi{\psi(s)}.
+    \end{align*}
+\item {Transformada de la derivada:}
+    \begin{itemize}[label=$\bullet$]
+      \item $\lap{f'(t)}=s\lap{f(t)}-f(0^+)$,\\[-2mm]
+      \item $\lap{f''(t)}=s^2 \lap{f(t)}-sf(0^+)-f'(0^+)$,\\[-3mm]
+      \item $\lap{f^{(n)}(t)}=s^n \lap{f(t)}-\sum_{i=1}^{n} s^{n-i}f^{(i-1)}(0^+)$.
+    \end{itemize}
+\item {Transformada de la integral:}
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+        $\lap{\intd{0}{t}{f(\tau)}{\tau}}=\frac{1}s\lap{f(t)}$,
+        &
+        $\lapi{\frac 1 s \varphi(s)}=\intd{0}{t}{\lapi{\varphi(s)}}{t}$.
+    \end{tabular}
+    \end{center}
+\item {Traslación en la base:}
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+       $\lap{e^{at}f(t)}=\lap[s-a]{f(t)}$,
+       &
+       $\lapi{\varphi(s-a)}=e^{at}\ \lapi{\varphi(s)}$.
+    \end{tabular}
+    \end{center}
+\item {Derivada de la transformada:}
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+       $\lap{t^{n}f(t)}=(-1)^{n}\ \frac{d^n}{ds^n}\left(\lap{f(t)}\right)$,
+       &
+       $\lapi{\varphi^{(n)}(s)}=(-1)^{n}\ t^n\ \lapi{\varphi(s)}$.
+    \end{tabular}
+    \end{center}
+\item {Traslación:}
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+       $\lap{u(t-a)f(t-a)}=e^{-as}\ \lap{f(t)}$,
+       &
+       $\lapi{e^{-as}\varphi(s)}=u(t-a)\ \lapi[t-a]{\varphi(s)}$.
+    \end{tabular}
+    \end{center}
+\item {Función periódica:} (con periodo $p$)
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+       $\lap{f(t)}=\frac{\intd{0}{p}{e^{-st}f(t)}{t}}{1-e^{-ps}}$.
+       &
+    \end{tabular}
+    \end{center}
+\item {Convolución:}
+    \begin{center}
+    \begin{tabular}{@{}p{7.2cm}p{8.6cm}@{}}
+       $\lap{f(t)\ast g(t)}=\lap{f(t)}\lap{g(t)}$,
+       &
+       $\lapi{\varphi(s)\psi(s)}=\lapi{\varphi(s)}\ast \lapi{\psi(s)}$.
+    \end{tabular}
+    \end{center}
+\end{itemize}
+
+
+\section{Otras propiedades}
+\subsection{Función Gamma}
+\begin{itemize}[leftmargin=*]
+\item $\Gam{x+1}=x\ \Gam{x}$,
+\item $\Gam{\frac{1}{2}}=\sqrt{\pi}$,
+\item $\Gam{n+1}=n!$, para todo $n\in \mathbb{N}$.
+\end{itemize}
+
+\subsection{Función Beta}
+\begin{itemize}[leftmargin=*]
+\item $\displaystyle\beta(x,y)=\frac{\Gam{x}\Gam{y}}{\Gam{x+y}}$.
+\end{itemize}
+
+\subsection{Función de Heaviside o función de salto unitario}
+\begin{itemize}[leftmargin=*]
+\item
+    \[
+        f(t)=\left\{\begin{array}{l c r}
+        f_1(t)&\text{si}&t<t_1,\\[1mm]
+        f_2(t)&\text{si}&t_1\leq t<t_2,\\[1mm]
+        f_3(t)&\text{si}&t_2\leq t<t_3,\\ \vdots&\vdots
+        \end{array}\right.
+    \]
+    \[
+        f(t)=f_1(t)+u(t-t_1)[f_2(t)-f_1(t)]+u(t-t_2)[f_3(t)-f_2(t)]+\cdots.
+    \]
+\end{itemize}
+
+\subsection{Convolución}
+\begin{itemize}[leftmargin=*]
+\item $[f(t)\ast g(t)]\ast h(t)=f(t)\ast [g(t)\ast h(t)]$,
+\item $f(t)\ast g(t)=g(t)\ast f(t)$.
+\end{itemize}
+
+\subsection{Delta de Dirac}
+\begin{itemize}[leftmargin=*]
+\item $u'(t-a)=\delta(t-a)$,
+\item $\displaystyle \intd{a}{b}{f(t)\delta^{(n)}(t-t_0)}{t}=
+        \begin{cases}
+            f^{(n)}(t_0) &\text{si } t_0\in(a,b),\\
+            0       &\text{si }  t_0\not\in(a,b).
+        \end{cases}$
+\end{itemize}
+
+
+
+\end{document} 
