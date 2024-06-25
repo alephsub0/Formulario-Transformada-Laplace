@@ -28,7 +28,7 @@
 <!-- Cuerpo -->
 ## Sobre el Proyecto
 
-Este repositorio contiene un formulario completo sobre la Transformada de Laplace diseñado para estudiantes de la asignatura de Ecuaciones Diferenciales Ordinarias. El documento en PDF se encuentra disponible en el siguiente enlace: [Formulario: Transformada de Laplace](https://github.com/alephsub0/Formulario-Transformada-Laplace/blob/main/FormularioTransformadaDeLaplace.pdf).
+Este repositorio contiene un formulario completo sobre la Transformada de Laplace diseñado para estudiantes de la asignatura de Ecuaciones Diferenciales Ordinarias. El documento en PDF se encuentra disponible en el siguiente enlace: [Formulario: Transformada de Laplace](https://github.com/alephsub0/Formulario-Transformada-Laplace/blob/main/FormularioLaplace.pdf).
 
 ### Construido con
 
