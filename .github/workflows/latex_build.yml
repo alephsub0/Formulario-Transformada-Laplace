@@ -20,7 +20,7 @@ jobs:
 
     - name: Compile LaTeX document
       run: |
-        latexmk -pdf -jobname="Formulario Transformada de Laplace" main.tex
+        latexmk -pdf -jobname="FormularioTransformadaDeLaplace" main.tex
 
     - name: Upload PDF
       uses: actions/upload-artifact@v2
